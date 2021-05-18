@@ -34,16 +34,21 @@ def lambda_handler(event=None, context=None):
     ]
 
     for bike in bikes:
-        driver.get(bike)
-        for bike_driver in driver.find_elements_by_class_name("bem-sku-selector__option-group-item"):
-            size = bike_driver.get_attribute("title").lower()
-            status = json.loads(bike_driver.find_element_by_xpath("input").get_attribute("data-display-buy"))['ProductAvailabilityMessage'].lower()
-            if size == 'large':
-                if 'currently out of stock' not in status:
-                    print(f"{bike.split('/')[-1].replace('-',' ')} available in {size}. See here - {bike}")
-                    sns_client.publish(TopicArn='arn:aws:sns:ap-southeast-2:747340109238:mobile', Message=f"{bike.split('/')[-1].replace('-',' ')} available in {size}. See here - {bike}")
-                else:
-                    print(f"{bike.split('/')[-1].replace('-',' ')} is unavailable in {size}")
+        try:
+            driver.get(bike)
+            for bike_driver in driver.find_elements_by_class_name("bem-sku-selector__option-group-item"):
+                size = bike_driver.get_attribute("title").lower()
+                status = json.loads(bike_driver.find_element_by_xpath("input").get_attribute("data-display-buy"))['ProductAvailabilityMessage'].lower()
+                if size == 'large':
+                    if 'currently out of stock' not in status:
+                        print(f"{bike.split('/')[-1].replace('-',' ')} available in {size}. See here - {bike}")
+                        sns_client.publish(TopicArn='arn:aws:sns:ap-southeast-2:747340109238:mobile', Message=f"{bike.split('/')[-1].replace('-',' ')} available in {size}. See here - {bike}")
+                    else:
+                        print(f"{bike.split('/')[-1].replace('-',' ')} is unavailable in {size}")
+        except Exception as e:
+            sns_client.publish(TopicArn='arn:aws:sns:ap-southeast-2:747340109238:personal-email', Message=f"MTB Lambda Error: {e}")
+            print(e)
+
     driver.quit()
 
     return {

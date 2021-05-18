@@ -21,12 +21,14 @@ Resources:
         MTBStockNotificationSchedule:
           Type: Schedule
           Properties:
-            Schedule: 'rate(4 hours)'
+            Schedule: 'rate(30 minutes)'
             Name: mtb-stock-notification
             Enabled: True
       Policies:
         - SNSPublishMessagePolicy:
             TopicName: mobile
+        - SNSPublishMessagePolicy:
+            TopicName: personal-email
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./source
