@@ -30,7 +30,10 @@ def lambda_handler(event=None, context=None):
 
 
     bikes = [
-    'https://www.wiggle.co.nz/nukeproof-mega-290-factory-carbon-bike-xt-2021'
+    'https://www.wiggle.co.nz/nukeproof-mega-290-factory-carbon-bike-xt-2021',
+    'https://www.wiggle.co.nz/nukeproof-mega-275-factory-carbon-bike-xt-2021',
+    'https://www.wiggle.co.nz/nukeproof-giga-275-factory-carbon-bike-xt-2021',
+    'https://www.wiggle.co.nz/nukeproof-giga-290-factory-carbon-bike-xt-2021'
     ]
 
     for bike in bikes:
@@ -55,3 +58,5 @@ def lambda_handler(event=None, context=None):
         'statusCode': 200,
         'body': 'success'
     }
+
+lambda_handler()

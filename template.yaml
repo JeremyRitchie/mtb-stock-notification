@@ -8,20 +8,20 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 60
+    Timeout: 120
 
 Resources:
   MTBStockNotification:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       PackageType: Image
-      MemorySize: 384
-      ImageUri: '747340109238.dkr.ecr.ap-southeast-2.amazonaws.com/mtbstocknotification'
+      MemorySize: 230
+      ImageUri: 'mtbstocknotification'
       Events:
         MTBStockNotificationSchedule:
           Type: Schedule
           Properties:
-            Schedule: 'rate(30 minutes)'
+            Schedule: 'rate(5 minutes)'
             Name: mtb-stock-notification
             Enabled: True
       Policies:
@@ -33,6 +33,7 @@ Resources:
       Dockerfile: Dockerfile
       DockerContext: ./source
       DockerTag: python3.8-v1
+      DockerBuildArgs: {"--platform": "linux/amd64"}
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
