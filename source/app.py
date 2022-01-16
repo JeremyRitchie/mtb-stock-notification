@@ -33,7 +33,8 @@ def lambda_handler(event=None, context=None):
     'https://www.wiggle.co.nz/nukeproof-mega-290-factory-carbon-bike-xt-2021',
     'https://www.wiggle.co.nz/nukeproof-mega-275-factory-carbon-bike-xt-2021',
     'https://www.wiggle.co.nz/nukeproof-giga-275-factory-carbon-bike-xt-2021',
-    'https://www.wiggle.co.nz/nukeproof-giga-290-factory-carbon-bike-xt-2021'
+    'https://www.wiggle.co.nz/nukeproof-giga-290-factory-carbon-bike-xt-2021',
+    'https://www.wiggle.co.nz/nukeproof-mega-297-mx-bike-xo1-2022'
     ]
 
     for bike in bikes:
